@@ -1,6 +1,6 @@
-package adaptors.alarm_service.common.exception;
+package adaptors.alarm_service.global.exception;
 
-import adaptors.alarm_service.common.response.BaseResponseStatus;
+import adaptors.alarm_service.global.response.BaseResponseStatus;
 import lombok.Getter;
 
 @Getter

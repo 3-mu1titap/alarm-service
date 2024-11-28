@@ -1,7 +1,7 @@
-package adaptors.alarm_service.common.exception;
+package adaptors.alarm_service.global.exception;
 
-import adaptors.alarm_service.common.response.BaseResponse;
-import adaptors.alarm_service.common.response.BaseResponseStatus;
+import adaptors.alarm_service.global.response.BaseResponse;
+import adaptors.alarm_service.global.response.BaseResponseStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;

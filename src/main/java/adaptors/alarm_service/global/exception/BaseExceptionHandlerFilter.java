@@ -1,7 +1,7 @@
-package adaptors.alarm_service.common.exception;
+package adaptors.alarm_service.global.exception;
 
-import adaptors.alarm_service.common.response.BaseResponse;
-import adaptors.alarm_service.common.response.BaseResponseStatus;
+import adaptors.alarm_service.global.response.BaseResponse;
+import adaptors.alarm_service.global.response.BaseResponseStatus;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

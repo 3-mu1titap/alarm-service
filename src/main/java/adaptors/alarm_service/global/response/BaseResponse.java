@@ -1,9 +1,9 @@
-package adaptors.alarm_service.common.response;
+package adaptors.alarm_service.global.response;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 
-import static adaptors.alarm_service.common.response.BaseResponseStatus.SUCCESS;
+import static adaptors.alarm_service.global.response.BaseResponseStatus.SUCCESS;
 
 public record BaseResponse<T>(HttpStatusCode httpStatus, Boolean isSuccess, String message, int code, T result) {
 

@@ -1,4 +1,4 @@
-package adaptors.alarm_service.common.response;
+package adaptors.alarm_service.global.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
