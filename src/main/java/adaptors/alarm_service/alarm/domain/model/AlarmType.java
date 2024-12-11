@@ -9,9 +9,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum AlarmType {
 
-    SESSION("세션"),
-    PAYMENT("결제"),
-    REVIEW("리뷰");
+    SESSION_REGISTER("세션 등록"),
+    MENTORING_REGISTER("멘토링 등록"),
+    REVIEW_REGISTER("리뷰 등록"),
+    PAY_SESSION("세션 결제");
 
     private final String alarmType;
 

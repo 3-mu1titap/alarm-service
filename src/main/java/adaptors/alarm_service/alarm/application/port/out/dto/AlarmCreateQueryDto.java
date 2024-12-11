@@ -1,55 +1,50 @@
-package adaptors.alarm_service.alarm.adaptor.out.mongo.document;
+package adaptors.alarm_service.alarm.application.port.out.dto;
 
 import adaptors.alarm_service.alarm.domain.model.AlarmType;
-import adaptors.alarm_service.global.document.BaseDocument;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
 @Getter
 @ToString
 @NoArgsConstructor
-@Document(collection = "alarm")
-public class AlarmDocument extends BaseDocument {
+public class AlarmCreateQueryDto {
 
-    @Id
-    private String id;
     private String uuid;
-    private String senderUuid;
-    private String receiverUuid;
+    private String userUuid;
+    private String sessionUuid;
     private AlarmType alarmType;
     private String senderMessage;
     private String receiverMessage;
 
     private Boolean isDeleted;
 
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+
     @Builder
-    public AlarmDocument(
-            String id,
+    public AlarmCreateQueryDto(
             String uuid,
-            String senderUuid,
-            String receiverUuid,
+            String userUuid,
+            String sessionUuid,
             AlarmType alarmType,
             String senderMessage,
             String receiverMessage,
+            Boolean isDeleted,
             LocalDateTime createdAt,
-            LocalDateTime updatedAt,
-            Boolean isDeleted) {
-        this.id = id;
+            LocalDateTime updatedAt
+    ) {
         this.uuid = uuid;
-        this.senderUuid = senderUuid;
-        this.receiverUuid = receiverUuid;
+        this.userUuid = userUuid;
+        this.sessionUuid = sessionUuid;
         this.alarmType = alarmType;
         this.senderMessage = senderMessage;
         this.receiverMessage = receiverMessage;
+        this.isDeleted = isDeleted;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.isDeleted = isDeleted;
     }
-
 }

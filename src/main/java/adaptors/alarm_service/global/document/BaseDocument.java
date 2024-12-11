@@ -11,11 +11,11 @@ import java.time.LocalDateTime;
 public abstract class BaseDocument {
 
     @CreatedDate
-    @Field("created_at")
+    @Field("createdAt")
     protected LocalDateTime createdAt; // 최초 생성일
 
     @LastModifiedDate
-    @Field("updated_at")
+    @Field("updatedAt")
     protected LocalDateTime updatedAt; // 마지막 수정일
 
 }

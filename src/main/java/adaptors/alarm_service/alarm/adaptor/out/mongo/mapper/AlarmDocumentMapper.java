@@ -1,18 +1,54 @@
 package adaptors.alarm_service.alarm.adaptor.out.mongo.mapper;
 
 import adaptors.alarm_service.alarm.adaptor.out.mongo.document.AlarmDocument;
-import adaptors.alarm_service.alarm.application.port.out.dto.AlarmConsumerTransactionDto;
+import adaptors.alarm_service.alarm.application.port.out.dto.AlarmCreateQueryDto;
+import adaptors.alarm_service.alarm.application.port.out.dto.AlarmReadQueryDto;
 import org.springframework.stereotype.Component;
 
 @Component
 public class AlarmDocumentMapper {
 
-    public AlarmDocument createDocument(AlarmConsumerTransactionDto alarmConsumerTransactionDto) {
+    public AlarmDocument createDocument(AlarmCreateQueryDto alarmCreateQueryDto) {
         return AlarmDocument.builder()
-                .userUuid(alarmConsumerTransactionDto.getUserUuid())
-                .sessionUuid(alarmConsumerTransactionDto.getSessionUuid())
-                .alarmType(alarmConsumerTransactionDto.getAlarmType())
-                .isDeleted(alarmConsumerTransactionDto.getIsDeleted())
+                .uuid(alarmCreateQueryDto.getUuid())
+                .senderUuid(alarmCreateQueryDto.getUserUuid())
+                .receiverUuid(alarmCreateQueryDto.getSessionUuid())
+                .alarmType(alarmCreateQueryDto.getAlarmType())
+                .senderMessage(alarmCreateQueryDto.getSenderMessage())
+                .receiverMessage(alarmCreateQueryDto.getReceiverMessage())
+                .createdAt(alarmCreateQueryDto.getCreatedAt())
+                .updatedAt(alarmCreateQueryDto.getUpdatedAt())
+                .isDeleted(alarmCreateQueryDto.getIsDeleted())
+                .build();
+    }
+
+    public AlarmDocument toDocument(AlarmReadQueryDto alarmReadQueryDto) {
+        return AlarmDocument.builder()
+                .id(alarmReadQueryDto.getId())
+                .uuid(alarmReadQueryDto.getUuid())
+                .senderUuid(alarmReadQueryDto.getSenderUuid())
+                .receiverUuid(alarmReadQueryDto.getReceiverUuid())
+                .alarmType(alarmReadQueryDto.getAlarmType())
+                .senderMessage(alarmReadQueryDto.getSenderMessage())
+                .receiverMessage(alarmReadQueryDto.getReceiverMessage())
+                .createdAt(alarmReadQueryDto.getCreatedAt())
+                .updatedAt(alarmReadQueryDto.getUpdatedAt())
+                .isDeleted(true)
+                .build();
+    }
+
+    public AlarmReadQueryDto toReadQueryDto(AlarmDocument alarmDocument) {
+        return AlarmReadQueryDto.builder()
+                .id(alarmDocument.getId())
+                .uuid(alarmDocument.getUuid())
+                .senderUuid(alarmDocument.getSenderUuid())
+                .receiverUuid(alarmDocument.getReceiverUuid())
+                .alarmType(alarmDocument.getAlarmType())
+                .senderMessage(alarmDocument.getSenderMessage())
+                .receiverMessage(alarmDocument.getReceiverMessage())
+                .createdAt(alarmDocument.getCreatedAt())
+                .updatedAt(alarmDocument.getUpdatedAt())
+                .isDeleted(alarmDocument.getIsDeleted())
                 .build();
     }
 

@@ -6,10 +6,10 @@ import lombok.ToString;
 
 @Getter
 @ToString
-public class AlarmConsumerVo {
+public class ConsumerCreateMentoringVo {
 
-    @JsonProperty("menteeUuid")
-    private String userUuid;
-    private String sessionUuid;
+    private String mentorUuid;
+    @JsonProperty("name")
+    private String mentoringName;
 
 }
