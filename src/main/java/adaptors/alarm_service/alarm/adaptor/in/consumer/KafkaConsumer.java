@@ -25,7 +25,6 @@ public class KafkaConsumer {
     @KafkaListener(topics = "register-session-user", groupId = GROUP_ID, containerFactory = "userSessionJoinDtoListener")
     public void processSessionJoinAlarm(ConsumerSessionRegisterVo consumerSessionRegisterVo) {
         log.info("alarmConsumerVo: {}", consumerSessionRegisterVo);
-
         alarmUseCase.createAlarm(consumerVoMapper.toPortInDto(consumerSessionRegisterVo, SESSION_REGISTER));
     }
 
