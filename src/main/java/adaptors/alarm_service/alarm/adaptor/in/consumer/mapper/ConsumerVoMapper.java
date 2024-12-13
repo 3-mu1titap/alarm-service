@@ -1,9 +1,6 @@
 package adaptors.alarm_service.alarm.adaptor.in.consumer.mapper;
 
-import adaptors.alarm_service.alarm.adaptor.in.consumer.vo.ConsumerCreateMentoringVo;
-import adaptors.alarm_service.alarm.adaptor.in.consumer.vo.ConsumerCreateReviewVo;
-import adaptors.alarm_service.alarm.adaptor.in.consumer.vo.ConsumerSessionPayVo;
-import adaptors.alarm_service.alarm.adaptor.in.consumer.vo.ConsumerSessionRegisterVo;
+import adaptors.alarm_service.alarm.adaptor.in.consumer.vo.*;
 import adaptors.alarm_service.alarm.application.port.in.dto.consumer.AlarmPortInDto;
 import adaptors.alarm_service.alarm.domain.model.AlarmType;
 import org.springframework.stereotype.Component;
@@ -58,6 +55,24 @@ public class ConsumerVoMapper {
                         sessionPayVo.getMenteeNickName(),
                         sessionPayVo.getMentoringName(),
                         sessionPayVo.getVolt().toString()})
+                .build();
+    }
+
+    public AlarmPortInDto toPortInDto(ConsumerUpdateSessionUserVo updateSessionUserVo, String mentoringName, String mentorUuid, AlarmType alarmType) {
+        return AlarmPortInDto.builder()
+                .alarmType(alarmType)
+                .senderUuid(updateSessionUserVo.getUserUuid())
+                .senderMessage(new String[]{
+                        updateSessionUserVo.getStartDate().getMonth().toString(),
+                        String.valueOf(updateSessionUserVo.getStartDate().getDayOfMonth()),
+                        mentoringName
+                })
+                .receiverUuid(mentorUuid)
+                .receiverMessage(new String[]{
+                        updateSessionUserVo.getStartDate().getMonth().toString(),
+                        String.valueOf(updateSessionUserVo.getStartDate().getDayOfMonth()),
+                        mentoringName
+                })
                 .build();
     }
 

@@ -15,4 +15,5 @@ public interface AlarmRepositoryPort {
     Slice<AlarmReadQueryDto> findAlarms(Pageable pageable, String userUuid);
 
     void deleteAlarm(AlarmReadQueryDto alarmReadQueryDto);
+
 }
