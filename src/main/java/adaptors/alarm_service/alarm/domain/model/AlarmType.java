@@ -12,7 +12,8 @@ public enum AlarmType {
     SESSION_REGISTER("세션 등록"),
     MENTORING_REGISTER("멘토링 등록"),
     REVIEW_REGISTER("리뷰 등록"),
-    PAY_SESSION("세션 결제");
+    PAY_SESSION("세션 결제"),
+    SESSION_CONFIRM("세션 확정");
 
     private final String alarmType;
 

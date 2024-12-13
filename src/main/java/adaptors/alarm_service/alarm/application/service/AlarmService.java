@@ -56,6 +56,7 @@ public class AlarmService implements AlarmUseCase {
         sseEmitterManager.sendAlarm(alarmDomain);
     }
 
+
     @Override
     public AlarmReadResponseDto getAlarm(RestReadAlarmDto readDto) {
         return alarmQueryMapper.toReadResponseDto(alarmRepositoryPort.findAlarm(readDto), readDto.getUserUuid());

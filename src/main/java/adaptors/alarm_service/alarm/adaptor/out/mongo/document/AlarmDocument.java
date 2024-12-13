@@ -9,6 +9,7 @@ import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -25,6 +26,7 @@ public class AlarmDocument extends BaseDocument {
     private AlarmType alarmType;
     private String senderMessage;
     private String receiverMessage;
+    private LocalDate triggerDate;
 
     private Boolean isDeleted;
 
@@ -37,6 +39,7 @@ public class AlarmDocument extends BaseDocument {
             AlarmType alarmType,
             String senderMessage,
             String receiverMessage,
+            LocalDate triggerDate,
             LocalDateTime createdAt,
             LocalDateTime updatedAt,
             Boolean isDeleted) {
@@ -47,6 +50,7 @@ public class AlarmDocument extends BaseDocument {
         this.alarmType = alarmType;
         this.senderMessage = senderMessage;
         this.receiverMessage = receiverMessage;
+        this.triggerDate = triggerDate;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.isDeleted = isDeleted;

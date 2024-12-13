@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -18,6 +19,7 @@ public class AlarmReadQueryDto {
     private AlarmType alarmType;
     private String senderMessage;
     private String receiverMessage;
+    private LocalDate triggerDate;
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -33,6 +35,7 @@ public class AlarmReadQueryDto {
         AlarmType alarmType,
         String senderMessage,
         String receiverMessage,
+        LocalDate triggerDate,
         LocalDateTime createdAt,
         LocalDateTime updatedAt,
         Boolean isDeleted
@@ -44,6 +47,7 @@ public class AlarmReadQueryDto {
         this.alarmType = alarmType;
         this.senderMessage = senderMessage;
         this.receiverMessage = receiverMessage;
+        this.triggerDate = triggerDate;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.isDeleted = isDeleted;
