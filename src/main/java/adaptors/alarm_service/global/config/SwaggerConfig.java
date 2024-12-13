@@ -36,7 +36,7 @@ public class SwaggerConfig {
                 .addServersItem(new Server().url(swaggerUri))
                 .info(apiInfo());
     }
-
+//
     private Info apiInfo() {
         return new Info()
                 .title("ALARM SERVICE")
