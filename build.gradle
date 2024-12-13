@@ -23,6 +23,10 @@ repositories {
 	mavenCentral()
 }
 
+ext {
+	set('springCloudVersion', '2022.0.3') // 사용하는 Spring Boot 버전에 맞는 버전
+}
+
 dependencies {
 
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
@@ -41,9 +45,15 @@ dependencies {
 	// Swagger
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
 
-	// OpenFeign 의존성
+	// Spring Cloud OpenFeign 의존성
 	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
 }
 
 tasks.named('test') {
