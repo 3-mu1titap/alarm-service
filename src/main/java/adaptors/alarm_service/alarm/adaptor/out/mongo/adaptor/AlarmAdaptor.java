@@ -36,6 +36,11 @@ public class AlarmAdaptor implements AlarmRepositoryPort {
     }
 
     @Override
+    public AlarmReadQueryDto findLastAlarm(String userUuid) {
+        return alarmMongoRepositoryCustom.findLastAlarm(userUuid);
+    }
+
+    @Override
     public Slice<AlarmReadQueryDto> findAlarms(Pageable pageable, String userUuid) {
         return alarmMongoRepositoryCustom.findAlarmsByUserUuid(pageable, userUuid);
     }
@@ -44,4 +49,5 @@ public class AlarmAdaptor implements AlarmRepositoryPort {
     public void deleteAlarm(AlarmReadQueryDto alarmReadQueryDto) {
         alarmMongoRepository.save(alarmDocumentMapper.toDocument(alarmReadQueryDto));
     }
+
 }

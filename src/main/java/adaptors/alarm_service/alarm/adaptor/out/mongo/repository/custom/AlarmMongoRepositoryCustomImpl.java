@@ -49,6 +49,25 @@ public class AlarmMongoRepositoryCustomImpl implements AlarmMongoRepositoryCusto
     }
 
     @Override
+    public AlarmReadQueryDto findLastAlarm(String userUuid) {
+
+        Query query = new Query(
+                new Criteria().andOperator(
+                        where("isDeleted").is(false),
+                        new Criteria().orOperator(
+                                where("senderUuid").is(userUuid),
+                                where("receiverUuid").is(userUuid)
+                        )
+                )
+        ).with(Sort.by(Sort.Direction.DESC, "createdAt")) // createdAt 기준 내림차순 정렬
+                .limit(1); // 가장 최신 1개 항목만 가져오기
+
+        return alarmDocumentMapper.toReadQueryDto(Objects.requireNonNull(
+                mongoTemplate.findOne(query, AlarmDocument.class)
+        ));
+    }
+
+    @Override
     public Slice<AlarmReadQueryDto> findAlarmsByUserUuid(Pageable pageable, String userUuid) {
 
         // 카운트 쿼리 생성

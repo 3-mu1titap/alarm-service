@@ -16,4 +16,5 @@ public interface AlarmRepositoryPort {
 
     void deleteAlarm(AlarmReadQueryDto alarmReadQueryDto);
 
+    AlarmReadQueryDto findLastAlarm(String userUuid);
 }

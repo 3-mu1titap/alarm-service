@@ -11,4 +11,5 @@ public interface AlarmMongoRepositoryCustom {
 
     Slice<AlarmReadQueryDto> findAlarmsByUserUuid(Pageable pageable, String userUuid);
 
+    AlarmReadQueryDto findLastAlarm(String userUuid);
 }

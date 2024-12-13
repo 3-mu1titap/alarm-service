@@ -3,7 +3,6 @@ package adaptors.alarm_service.alarm.adaptor.in.rest;
 import adaptors.alarm_service.alarm.adaptor.in.rest.mapper.RestVoMapper;
 import adaptors.alarm_service.alarm.adaptor.out.mongo.dto.AlarmReadResponseDto;
 import adaptors.alarm_service.alarm.application.port.in.AlarmUseCase;
-import adaptors.alarm_service.alarm.application.port.out.dto.AlarmReadQueryDto;
 import adaptors.alarm_service.global.response.BaseResponse;
 import adaptors.alarm_service.global.utils.SseEmitterManager;
 import io.swagger.v3.oas.annotations.Operation;
@@ -37,6 +36,15 @@ public class AlarmController {
             @PathVariable("uuid") String uuid) {
         return new BaseResponse<>(
                 alarmUseCase.getAlarm(restVoMapper.toReadDto(uuid, userUuid))
+        );
+    }
+
+    @Operation(summary = "가장 최근 알림 조회", description = "userUuid & alarmUuid 필요", tags = {"알림"})
+    @GetMapping("/alarms/last")
+    public BaseResponse<AlarmReadResponseDto> getLastAlarm(
+            @RequestParam("userUuid") String userUuid) {
+        return new BaseResponse<>(
+                alarmUseCase.getLastAlarm(userUuid)
         );
     }
 

@@ -17,4 +17,5 @@ public interface AlarmUseCase {
 
     void deleteAlarm(RestReadAlarmDto readAlarmDto);
 
+    AlarmReadResponseDto getLastAlarm(String userUuid);
 }
