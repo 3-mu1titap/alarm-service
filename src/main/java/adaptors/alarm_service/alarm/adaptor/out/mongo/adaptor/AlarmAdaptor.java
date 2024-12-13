@@ -14,6 +14,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
+
 @Slf4j
 @Repository
 @RequiredArgsConstructor
@@ -38,6 +40,11 @@ public class AlarmAdaptor implements AlarmRepositoryPort {
     @Override
     public AlarmReadQueryDto findLastAlarm(String userUuid) {
         return alarmMongoRepositoryCustom.findLastAlarm(userUuid);
+    }
+
+    @Override
+    public void findAlarmsByTriggerDate(LocalDateTime now) {
+        alarmMongoRepositoryCustom.findAlarmsByTriggerDate(now);
     }
 
     @Override

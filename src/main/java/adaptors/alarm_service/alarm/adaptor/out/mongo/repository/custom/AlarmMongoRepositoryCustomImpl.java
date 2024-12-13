@@ -14,6 +14,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -65,6 +66,11 @@ public class AlarmMongoRepositoryCustomImpl implements AlarmMongoRepositoryCusto
         return alarmDocumentMapper.toReadQueryDto(Objects.requireNonNull(
                 mongoTemplate.findOne(query, AlarmDocument.class)
         ));
+    }
+
+    @Override
+    public void findAlarmsByTriggerDate(LocalDateTime now) {
+
     }
 
     @Override

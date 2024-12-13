@@ -6,6 +6,8 @@ import adaptors.alarm_service.alarm.application.port.out.dto.AlarmReadQueryDto;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 
+import java.time.LocalDateTime;
+
 public interface AlarmRepositoryPort {
 
     void saveAlarm(AlarmCreateQueryDto alarmCreateQueryDto);
@@ -17,4 +19,6 @@ public interface AlarmRepositoryPort {
     void deleteAlarm(AlarmReadQueryDto alarmReadQueryDto);
 
     AlarmReadQueryDto findLastAlarm(String userUuid);
+
+    void findAlarmsByTriggerDate(LocalDateTime now);
 }

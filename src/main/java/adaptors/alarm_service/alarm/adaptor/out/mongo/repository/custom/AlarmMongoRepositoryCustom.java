@@ -5,6 +5,8 @@ import adaptors.alarm_service.alarm.application.port.out.dto.AlarmReadQueryDto;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 
+import java.time.LocalDateTime;
+
 public interface AlarmMongoRepositoryCustom {
 
     AlarmReadQueryDto findAlarm(RestReadAlarmDto readAlarmDto);
@@ -12,4 +14,6 @@ public interface AlarmMongoRepositoryCustom {
     Slice<AlarmReadQueryDto> findAlarmsByUserUuid(Pageable pageable, String userUuid);
 
     AlarmReadQueryDto findLastAlarm(String userUuid);
+
+    void findAlarmsByTriggerDate(LocalDateTime now);
 }

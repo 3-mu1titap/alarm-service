@@ -19,6 +19,7 @@ public class AlarmScheduler {
     public void findAlarmsEqualTriggerDate() {
         LocalDateTime now = LocalDateTime.now();
 
+        alarmRepositoryPort.findAlarmsByTriggerDate(now);
     }
 
 }

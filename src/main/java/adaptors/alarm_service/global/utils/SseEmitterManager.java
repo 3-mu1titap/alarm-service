@@ -18,24 +18,24 @@ public class SseEmitterManager {
     /**
      * SseEmitter 생성 및 등록
      */
-    public SseEmitter createEmitter(String receiverUud) {
+    public SseEmitter createEmitter(String userUuid) {
 
         SseEmitter emitter = new SseEmitter(Long.MAX_VALUE); // 무제한 연결
-        emitters.put(receiverUud, emitter);
+        emitters.put(userUuid, emitter);
 
-        log.info("SSE Emitter created for user: {}", receiverUud);
+        log.info("SSE Emitter created for user: {}", userUuid);
 
         emitter.onCompletion(() -> {
-            emitters.remove(receiverUud);
-            log.info("SSE connection completed for user: {}", receiverUud);
+            emitters.remove(userUuid);
+            log.info("SSE connection completed for user: {}", userUuid);
         });
         emitter.onTimeout(() -> {
-            emitters.remove(receiverUud);
-            log.info("SSE connection timed out for user: {}", receiverUud);
+            emitters.remove(userUuid);
+            log.info("SSE connection timed out for user: {}", userUuid);
         });
         emitter.onError((e) -> {
-            emitters.remove(receiverUud);
-            log.error("SSE connection error for user: {}", receiverUud, e);
+            emitters.remove(userUuid);
+            log.error("SSE connection error for user: {}", userUuid, e);
         });
 
         return emitter;
