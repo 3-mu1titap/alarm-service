@@ -3,11 +3,14 @@ package adaptors.alarm_service.alarm.adaptor.in.consumer;
 import adaptors.alarm_service.alarm.adaptor.in.consumer.vo.*;
 import adaptors.alarm_service.alarm.adaptor.in.consumer.mapper.ConsumerVoMapper;
 import adaptors.alarm_service.alarm.adaptor.in.feignclient.MentoringServiceFeignClient;
+import adaptors.alarm_service.alarm.adaptor.in.feignclient.dto.SessionRoomResponseDto;
 import adaptors.alarm_service.alarm.application.port.in.AlarmUseCase;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalTime;
 
 import static adaptors.alarm_service.alarm.domain.model.AlarmType.*;
 
@@ -50,11 +53,13 @@ public class KafkaConsumer {
     public void processUpdateSessionUserAlarm(ConsumerUpdateSessionUserVo consumerUpdateSessionUserVo) {
         log.info("consumerUpdateSessionUserVo: {}", consumerUpdateSessionUserVo);
 
-        String mentoringName = mentoringServiceFeignClient.findSessionRoomBySessionUuid(consumerUpdateSessionUserVo.getSessionUuid()).getMentoringName();
+        SessionRoomResponseDto sessionRoomResponseDto = mentoringServiceFeignClient.findSessionRoomBySessionUuid(consumerUpdateSessionUserVo.getSessionUuid());
+        String mentoringName = sessionRoomResponseDto.getMentoringName();
+        LocalTime startTime = sessionRoomResponseDto.getStartTime();
 
         String mentorUuid = mentoringServiceFeignClient.getMentorUuidBySessionUuid(consumerUpdateSessionUserVo.getSessionUuid());
 
-        alarmUseCase.createAlarm(consumerVoMapper.toPortInDto(consumerUpdateSessionUserVo, mentoringName, mentorUuid, SESSION_CONFIRM));
+        alarmUseCase.createAlarm(consumerVoMapper.toPortInDto(consumerUpdateSessionUserVo, mentoringName, startTime, mentorUuid, SESSION_CONFIRM));
     }
 
 }

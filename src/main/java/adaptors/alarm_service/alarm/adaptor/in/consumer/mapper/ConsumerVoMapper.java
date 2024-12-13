@@ -5,6 +5,9 @@ import adaptors.alarm_service.alarm.application.port.in.dto.consumer.AlarmPortIn
 import adaptors.alarm_service.alarm.domain.model.AlarmType;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 @Component
 public class ConsumerVoMapper {
 
@@ -58,22 +61,24 @@ public class ConsumerVoMapper {
                 .build();
     }
 
-    public AlarmPortInDto toPortInDto(ConsumerUpdateSessionUserVo updateSessionUserVo, String mentoringName, String mentorUuid, AlarmType alarmType) {
+    public AlarmPortInDto toPortInDto(ConsumerUpdateSessionUserVo updateSessionUserVo, String mentoringName, LocalTime startTime, String mentorUuid, AlarmType alarmType) {
         return AlarmPortInDto.builder()
                 .alarmType(alarmType)
                 .senderUuid(updateSessionUserVo.getUserUuid())
                 .senderMessage(new String[]{
                         updateSessionUserVo.getStartDate().getMonth().toString(),
                         String.valueOf(updateSessionUserVo.getStartDate().getDayOfMonth()),
+                        startTime.toString(),
                         mentoringName
                 })
                 .receiverUuid(mentorUuid)
                 .receiverMessage(new String[]{
                         updateSessionUserVo.getStartDate().getMonth().toString(),
                         String.valueOf(updateSessionUserVo.getStartDate().getDayOfMonth()),
+                        startTime.toString(),
                         mentoringName
                 })
-                .triggerDate(updateSessionUserVo.getStartDate().minusDays(1))
+                .triggerDate(LocalDateTime.of(updateSessionUserVo.getStartDate(), startTime.minusHours(1)))
                 .build();
     }
 

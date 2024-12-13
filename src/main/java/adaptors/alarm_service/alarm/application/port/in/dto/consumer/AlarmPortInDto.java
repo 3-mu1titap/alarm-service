@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
@@ -16,7 +17,7 @@ public class AlarmPortInDto {
     private AlarmType alarmType;
     private String[] senderMessage;
     private String[] receiverMessage;
-    private LocalDate triggerDate;
+    private LocalDateTime triggerDate;
 
     @Builder
     public AlarmPortInDto(
@@ -25,7 +26,7 @@ public class AlarmPortInDto {
             AlarmType alarmType,
             String[] senderMessage,
             String[] receiverMessage,
-            LocalDate triggerDate
+            LocalDateTime triggerDate
     ) {
         this.senderUuid = senderUuid;
         this.receiverUuid = receiverUuid;

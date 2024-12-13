@@ -52,6 +52,8 @@ public class SseEmitterManager {
         String receiverUuid = alarmDomain.getReceiverUuid();
         String receiverMessage = alarmDomain.getReceiverMessage();
 
+        log.info("sendAlarm senderUuid : {} -> {}", senderUuid, senderMessage);
+
         if (senderUuid != null) {
             sendSSE(alarmDomain, senderUuid, senderMessage);
 

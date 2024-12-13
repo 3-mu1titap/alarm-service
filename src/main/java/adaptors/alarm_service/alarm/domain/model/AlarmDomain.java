@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -19,7 +18,7 @@ public class AlarmDomain {
     private AlarmType alarmType;
     private String senderMessage;
     private String receiverMessage;
-    private LocalDate triggerDate;
+    private LocalDateTime triggerDate;
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -34,7 +33,7 @@ public class AlarmDomain {
             AlarmType alarmType,
             String senderMessage,
             String receiverMessage,
-            LocalDate triggerDate,
+            LocalDateTime triggerDate,
             LocalDateTime createdAt,
             LocalDateTime updatedAt,
             Boolean isDeleted) {
