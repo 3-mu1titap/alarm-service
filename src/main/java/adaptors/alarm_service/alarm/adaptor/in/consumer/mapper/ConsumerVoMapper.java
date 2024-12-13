@@ -73,6 +73,7 @@ public class ConsumerVoMapper {
                         String.valueOf(updateSessionUserVo.getStartDate().getDayOfMonth()),
                         mentoringName
                 })
+                .triggerDate(updateSessionUserVo.getStartDate().minusDays(1))
                 .build();
     }
 

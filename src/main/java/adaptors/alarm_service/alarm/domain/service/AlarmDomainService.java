@@ -18,6 +18,7 @@ public class AlarmDomainService {
                 .alarmType(alarmPortInDto.getAlarmType())
                 .senderMessage(senderMessage)
                 .receiverMessage(receiverMessage)
+                .triggerDate(alarmPortInDto.getTriggerDate())
                 .isDeleted(false)
                 .build();
     }
@@ -25,13 +26,15 @@ public class AlarmDomainService {
     public AlarmDomain deleteAlarm(AlarmDocument alarmDocument) {
         return AlarmDomain.builder()
                 .uuid(alarmDocument.getUuid())
-                .senderUuid(alarmDocument.getSenderUuid())
-                .receiverUuid(alarmDocument.getReceiverUuid())
                 .alarmType(alarmDocument.getAlarmType())
-//                .message(alarmDocument.getMessage())
-                .isDeleted(true)
+                .senderUuid(alarmDocument.getSenderUuid())
+                .senderMessage(alarmDocument.getSenderMessage())
+                .receiverUuid(alarmDocument.getReceiverUuid())
+                .receiverMessage(alarmDocument.getReceiverMessage())
+                .triggerDate(alarmDocument.getTriggerDate())
                 .createdAt(alarmDocument.getCreatedAt())
                 .updatedAt(alarmDocument.getUpdatedAt())
+                .isDeleted(true)
                 .build();
     }
 }

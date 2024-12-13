@@ -18,6 +18,7 @@ public class AlarmQueryMapper {
                 .alarmType(alarmDomain.getAlarmType())
                 .senderMessage(alarmDomain.getSenderMessage())
                 .receiverMessage(alarmDomain.getReceiverMessage())
+                .triggerDate(alarmDomain.getTriggerDate())
                 .createdAt(alarmDomain.getCreatedAt())
                 .updatedAt(alarmDomain.getUpdatedAt())
                 .isDeleted(alarmDomain.getIsDeleted())
