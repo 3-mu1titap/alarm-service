@@ -26,7 +26,7 @@ public class AlarmController {
     @Operation(summary = "알림 연결", description = "userUuid로 SSE 커넥션 생성", tags = {"알림"})
     @GetMapping(value = "/alarms/connect", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public SseEmitter subscribe(
-            @RequestHeader("userUuid") String userUuid) {
+            @RequestParam("userUuid") String userUuid) {
         return emitterManager.createEmitter(userUuid);
     }
 
