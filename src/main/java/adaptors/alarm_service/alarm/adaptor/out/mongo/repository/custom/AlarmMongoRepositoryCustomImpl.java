@@ -71,6 +71,33 @@ public class AlarmMongoRepositoryCustomImpl implements AlarmMongoRepositoryCusto
     @Override
     public void findAlarmsByTriggerDate(LocalDateTime now) {
 
+        Query query = new Query(
+                new Criteria().andOperator(
+                        where("triggerDate").gte(
+                                LocalDateTime.of(
+                                        now.getYear(),
+                                        now.getMonth(),
+                                        now.getDayOfMonth(),
+                                        now.getHour(),
+                                        now.getMinute(),
+                                        0
+                                )
+                        ),
+                        where("triggerDate").lt(
+                                LocalDateTime.of(
+                                        now.getYear(),
+                                        now.getMonth(),
+                                        now.getDayOfMonth(),
+                                        now.getHour(),
+                                        now.getMinute() + 1,
+                                        0
+                                )
+                        ),
+                        where("isDeleted").is(false)
+                )
+        );
+
+        List<AlarmDocument> alarmDocuments = mongoTemplate.find(query, AlarmDocument.class);
     }
 
     @Override
