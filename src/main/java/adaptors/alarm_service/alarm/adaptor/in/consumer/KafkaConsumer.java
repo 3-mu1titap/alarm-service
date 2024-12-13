@@ -2,7 +2,7 @@ package adaptors.alarm_service.alarm.adaptor.in.consumer;
 
 import adaptors.alarm_service.alarm.adaptor.in.consumer.vo.*;
 import adaptors.alarm_service.alarm.adaptor.in.consumer.mapper.ConsumerVoMapper;
-//import adaptors.alarm_service.alarm.adaptor.in.feignclient.MentoringServiceFeignClient;
+import adaptors.alarm_service.alarm.adaptor.in.feignclient.MentoringServiceFeignClient;
 import adaptors.alarm_service.alarm.application.port.in.AlarmUseCase;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +20,7 @@ public class KafkaConsumer {
     private final ConsumerVoMapper consumerVoMapper;
     private static final String GROUP_ID = "kafka-alarm-service";
 
-//    private final MentoringServiceFeignClient mentoringServiceFeignClient;
+    private final MentoringServiceFeignClient mentoringServiceFeignClient;
 
     @KafkaListener(topics = "register-session-user", groupId = GROUP_ID, containerFactory = "userSessionJoinDtoListener")
     public void processSessionJoinAlarm(ConsumerSessionRegisterVo consumerSessionRegisterVo) {
@@ -46,15 +46,15 @@ public class KafkaConsumer {
         alarmUseCase.createAlarm(consumerVoMapper.toPortInDto(consumerSessionPayVo, PAY_SESSION));
     }
 
-//    @KafkaListener(topics = "update-session-user", groupId = GROUP_ID, containerFactory = "updateSessionUserDtoListener")
-//    public void processUpdateSessionUserAlarm(ConsumerUpdateSessionUserVo consumerUpdateSessionUserVo) {
-//        log.info("consumerUpdateSessionUserVo: {}", consumerUpdateSessionUserVo);
-//
-//        String mentoringName = mentoringServiceFeignClient.findSessionRoomBySessionUuid(consumerUpdateSessionUserVo.getSessionUuid()).getMentoringName();
-//
-//        String mentorUuid = mentoringServiceFeignClient.getMentorUuidBySessionUuid(consumerUpdateSessionUserVo.getSessionUuid());
-//
-//        alarmUseCase.createAlarm(consumerVoMapper.toPortInDto(consumerUpdateSessionUserVo, mentoringName, mentorUuid, SESSION_CONFIRM));
-//    }
+    @KafkaListener(topics = "update-session-user", groupId = GROUP_ID, containerFactory = "updateSessionUserDtoListener")
+    public void processUpdateSessionUserAlarm(ConsumerUpdateSessionUserVo consumerUpdateSessionUserVo) {
+        log.info("consumerUpdateSessionUserVo: {}", consumerUpdateSessionUserVo);
+
+        String mentoringName = mentoringServiceFeignClient.findSessionRoomBySessionUuid(consumerUpdateSessionUserVo.getSessionUuid()).getMentoringName();
+
+        String mentorUuid = mentoringServiceFeignClient.getMentorUuidBySessionUuid(consumerUpdateSessionUserVo.getSessionUuid());
+
+        alarmUseCase.createAlarm(consumerVoMapper.toPortInDto(consumerUpdateSessionUserVo, mentoringName, mentorUuid, SESSION_CONFIRM));
+    }
 
 }
