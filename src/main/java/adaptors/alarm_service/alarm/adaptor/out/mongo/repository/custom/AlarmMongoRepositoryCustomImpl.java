@@ -84,14 +84,13 @@ public class AlarmMongoRepositoryCustomImpl implements AlarmMongoRepositoryCusto
                                         oneHourAgo.getMinute(),
                                         0
                                 )
-                        ),
-                        where("triggerDate").lt(
+                        ).lt(
                                 LocalDateTime.of(
-                                        now.getYear(),
-                                        now.getMonth(),
-                                        now.getDayOfMonth(),
-                                        now.getHour(),
-                                        now.getMinute(),
+                                        oneHourAgo.getYear(),
+                                        oneHourAgo.getMonth(),
+                                        oneHourAgo.getDayOfMonth(),
+                                        oneHourAgo.getHour(),
+                                        oneHourAgo.getMinute() + 1,
                                         0
                                 )
                         ),

@@ -79,14 +79,14 @@ public class ConsumerVoMapper {
                 .alarmType(alarmType)
                 .senderUuid(updateSessionUserVo.getUserUuid())
                 .senderMessage(new String[]{
-                        updateSessionUserVo.getStartDate().getMonth().toString(),
+                        String.valueOf(updateSessionUserVo.getStartDate().getMonth().getValue()),
                         String.valueOf(updateSessionUserVo.getStartDate().getDayOfMonth()),
                         startTime.toString(),
                         mentoringName
                 })
                 .receiverUuid(mentorUuid)
                 .receiverMessage(new String[]{
-                        updateSessionUserVo.getStartDate().getMonth().toString(),
+                        String.valueOf(updateSessionUserVo.getStartDate().getMonth().getValue()),
                         String.valueOf(updateSessionUserVo.getStartDate().getDayOfMonth()),
                         startTime.toString(),
                         mentoringName

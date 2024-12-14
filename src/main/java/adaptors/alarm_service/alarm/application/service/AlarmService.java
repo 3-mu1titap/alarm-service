@@ -39,6 +39,8 @@ public class AlarmService implements AlarmUseCase {
     @Override
     public void createAlarm(AlarmPortInDto alarmPortInDto) {
 
+        log.info("alarmPortInDto : {}", alarmPortInDto);
+
         String senderMessage = messageGenerator.generateSenderMessage(alarmPortInDto);
 
         String receiverMessage = messageGenerator.generateReceiverMessage(alarmPortInDto);

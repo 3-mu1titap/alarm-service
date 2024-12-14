@@ -4,11 +4,13 @@ import adaptors.alarm_service.alarm.domain.model.AlarmType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
+@ToString
 @NoArgsConstructor
 public class AlarmPortInDto {
 
