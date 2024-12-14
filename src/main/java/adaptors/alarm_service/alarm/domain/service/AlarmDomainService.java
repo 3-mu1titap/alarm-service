@@ -1,7 +1,7 @@
 package adaptors.alarm_service.alarm.domain.service;
 
-import adaptors.alarm_service.alarm.adaptor.out.mongo.document.AlarmDocument;
 import adaptors.alarm_service.alarm.application.port.in.dto.consumer.AlarmPortInDto;
+import adaptors.alarm_service.alarm.application.port.out.dto.AlarmReadQueryDto;
 import adaptors.alarm_service.alarm.domain.model.AlarmDomain;
 import org.springframework.stereotype.Service;
 
@@ -23,18 +23,18 @@ public class AlarmDomainService {
                 .build();
     }
 
-    public AlarmDomain deleteAlarm(AlarmDocument alarmDocument) {
+    public AlarmDomain toDomain(AlarmReadQueryDto readQueryDto) {
         return AlarmDomain.builder()
-                .uuid(alarmDocument.getUuid())
-                .alarmType(alarmDocument.getAlarmType())
-                .senderUuid(alarmDocument.getSenderUuid())
-                .senderMessage(alarmDocument.getSenderMessage())
-                .receiverUuid(alarmDocument.getReceiverUuid())
-                .receiverMessage(alarmDocument.getReceiverMessage())
-                .triggerDate(alarmDocument.getTriggerDate())
-                .createdAt(alarmDocument.getCreatedAt())
-                .updatedAt(alarmDocument.getUpdatedAt())
-                .isDeleted(true)
+                .uuid(readQueryDto.getUuid())
+                .alarmType(readQueryDto.getAlarmType())
+                .senderUuid(readQueryDto.getSenderUuid())
+                .senderMessage(readQueryDto.getSenderMessage())
+                .receiverUuid(readQueryDto.getReceiverUuid())
+                .receiverMessage(readQueryDto.getReceiverMessage())
+                .triggerDate(readQueryDto.getTriggerDate())
+                .createdAt(readQueryDto.getCreatedAt())
+                .updatedAt(readQueryDto.getUpdatedAt())
+                .isDeleted(readQueryDto.getIsDeleted())
                 .build();
     }
 }

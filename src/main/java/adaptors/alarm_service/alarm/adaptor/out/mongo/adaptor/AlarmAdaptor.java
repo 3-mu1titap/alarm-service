@@ -15,6 +15,7 @@ import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Slf4j
 @Repository
@@ -43,8 +44,8 @@ public class AlarmAdaptor implements AlarmRepositoryPort {
     }
 
     @Override
-    public void findAlarmsByTriggerDate(LocalDateTime now) {
-        alarmMongoRepositoryCustom.findAlarmsByTriggerDate(now);
+    public List<AlarmReadQueryDto> findAlarmsByTriggerDate(LocalDateTime now) {
+        return alarmMongoRepositoryCustom.findAlarmsByTriggerDate(now);
     }
 
     @Override

@@ -11,7 +11,9 @@ import java.time.LocalTime;
 @Component
 public class ConsumerVoMapper {
 
-    public AlarmPortInDto toPortInDto(ConsumerSessionRegisterVo sessionRegisterVo, AlarmType alarmType) {
+    public AlarmPortInDto toPortInDto(
+            ConsumerSessionRegisterVo sessionRegisterVo,
+            AlarmType alarmType) {
         return AlarmPortInDto.builder()
                 .alarmType(alarmType)
                 .senderUuid(sessionRegisterVo.getMenteeUuid())
@@ -24,7 +26,9 @@ public class ConsumerVoMapper {
                 .build();
     }
 
-    public AlarmPortInDto toPortInDto(ConsumerCreateMentoringVo createMentoringVo, AlarmType alarmType) {
+    public AlarmPortInDto toPortInDto(
+            ConsumerCreateMentoringVo createMentoringVo,
+            AlarmType alarmType) {
         return AlarmPortInDto.builder()
                 .alarmType(alarmType)
                 .senderUuid(createMentoringVo.getMentorUuid())
@@ -33,7 +37,9 @@ public class ConsumerVoMapper {
                 .build();
     }
 
-    public AlarmPortInDto toPortInDto(ConsumerCreateReviewVo createReviewVo, AlarmType alarmType) {
+    public AlarmPortInDto toPortInDto(
+            ConsumerCreateReviewVo createReviewVo,
+            AlarmType alarmType) {
         return AlarmPortInDto.builder()
                 .alarmType(alarmType)
                 .senderUuid(createReviewVo.getMenteeUuid())
@@ -46,7 +52,9 @@ public class ConsumerVoMapper {
                 .build();
     }
 
-    public AlarmPortInDto toPortInDto(ConsumerSessionPayVo sessionPayVo, AlarmType alarmType) {
+    public AlarmPortInDto toPortInDto(
+            ConsumerSessionPayVo sessionPayVo,
+            AlarmType alarmType) {
         return AlarmPortInDto.builder()
                 .alarmType(alarmType)
                 .senderUuid(sessionPayVo.getMenteeUuid())
@@ -61,7 +69,12 @@ public class ConsumerVoMapper {
                 .build();
     }
 
-    public AlarmPortInDto toPortInDto(ConsumerUpdateSessionUserVo updateSessionUserVo, String mentoringName, LocalTime startTime, String mentorUuid, AlarmType alarmType) {
+    public AlarmPortInDto toPortInDto(
+            ConsumerUpdateSessionUserVo updateSessionUserVo,
+            String mentoringName,
+            LocalTime startTime,
+            String mentorUuid,
+            AlarmType alarmType) {
         return AlarmPortInDto.builder()
                 .alarmType(alarmType)
                 .senderUuid(updateSessionUserVo.getUserUuid())
@@ -78,7 +91,7 @@ public class ConsumerVoMapper {
                         startTime.toString(),
                         mentoringName
                 })
-                .triggerDate(LocalDateTime.of(updateSessionUserVo.getStartDate(), startTime.minusHours(1)))
+                .triggerDate(LocalDateTime.of(updateSessionUserVo.getStartDate(), startTime))
                 .build();
     }
 

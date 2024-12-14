@@ -69,17 +69,19 @@ public class AlarmMongoRepositoryCustomImpl implements AlarmMongoRepositoryCusto
     }
 
     @Override
-    public void findAlarmsByTriggerDate(LocalDateTime now) {
+    public List<AlarmReadQueryDto> findAlarmsByTriggerDate(LocalDateTime now) {
+
+        LocalDateTime oneHourAgo = now.minusHours(1);
 
         Query query = new Query(
                 new Criteria().andOperator(
                         where("triggerDate").gte(
                                 LocalDateTime.of(
-                                        now.getYear(),
-                                        now.getMonth(),
-                                        now.getDayOfMonth(),
-                                        now.getHour(),
-                                        now.getMinute(),
+                                        oneHourAgo.getYear(),
+                                        oneHourAgo.getMonth(),
+                                        oneHourAgo.getDayOfMonth(),
+                                        oneHourAgo.getHour(),
+                                        oneHourAgo.getMinute(),
                                         0
                                 )
                         ),
@@ -89,7 +91,7 @@ public class AlarmMongoRepositoryCustomImpl implements AlarmMongoRepositoryCusto
                                         now.getMonth(),
                                         now.getDayOfMonth(),
                                         now.getHour(),
-                                        now.getMinute() + 1,
+                                        now.getMinute(),
                                         0
                                 )
                         ),
@@ -97,7 +99,9 @@ public class AlarmMongoRepositoryCustomImpl implements AlarmMongoRepositoryCusto
                 )
         );
 
-        List<AlarmDocument> alarmDocuments = mongoTemplate.find(query, AlarmDocument.class);
+        return mongoTemplate.find(query, AlarmDocument.class).stream()
+                .map(alarmDocumentMapper::toReadQueryDto)
+                .toList();
     }
 
     @Override

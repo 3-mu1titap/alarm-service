@@ -12,5 +12,6 @@ public class ConsumerUpdateSessionUserVo {
     private String userUuid;
     private String sessionUuid;
     private LocalDate startDate;
+    private String status;
 
 }

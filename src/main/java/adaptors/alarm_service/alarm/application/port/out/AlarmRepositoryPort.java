@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public interface AlarmRepositoryPort {
 
@@ -20,5 +21,5 @@ public interface AlarmRepositoryPort {
 
     AlarmReadQueryDto findLastAlarm(String userUuid);
 
-    void findAlarmsByTriggerDate(LocalDateTime now);
+    List<AlarmReadQueryDto> findAlarmsByTriggerDate(LocalDateTime now);
 }

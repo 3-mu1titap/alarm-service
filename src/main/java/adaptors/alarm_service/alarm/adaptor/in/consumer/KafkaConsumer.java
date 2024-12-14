@@ -53,13 +53,22 @@ public class KafkaConsumer {
     public void processUpdateSessionUserAlarm(ConsumerUpdateSessionUserVo consumerUpdateSessionUserVo) {
         log.info("consumerUpdateSessionUserVo: {}", consumerUpdateSessionUserVo);
 
-        SessionRoomResponseDto sessionRoomResponseDto = mentoringServiceFeignClient.findSessionRoomBySessionUuid(consumerUpdateSessionUserVo.getSessionUuid());
-        String mentoringName = sessionRoomResponseDto.getMentoringName();
-        LocalTime startTime = sessionRoomResponseDto.getStartTime();
+        if (consumerUpdateSessionUserVo.getStatus().equals("CONFIRMED")) {
+            log.info("feignClient 호출 전1");
+            SessionRoomResponseDto sessionRoomResponseDto = mentoringServiceFeignClient.findSessionRoomBySessionUuid(consumerUpdateSessionUserVo.getSessionUuid());
+            String mentoringName = sessionRoomResponseDto.getMentoringName();
+            LocalTime startTime = sessionRoomResponseDto.getStartTime();
+            log.info("mentoringName: {}", mentoringName);
+            log.info("startTime: {}", startTime);
+            log.info("feignClient 호출 후1");
 
-        String mentorUuid = mentoringServiceFeignClient.getMentorUuidBySessionUuid(consumerUpdateSessionUserVo.getSessionUuid());
+            log.info("feignClient 호출 전2");
+            String mentorUuid = mentoringServiceFeignClient.getMentorUuidBySessionUuid(consumerUpdateSessionUserVo.getSessionUuid());
+            log.info("mentorUuid: {}", mentorUuid);
+            log.info("feignClient 호출 후2");
 
-        alarmUseCase.createAlarm(consumerVoMapper.toPortInDto(consumerUpdateSessionUserVo, mentoringName, startTime, mentorUuid, SESSION_CONFIRM));
+            alarmUseCase.createAlarm(consumerVoMapper.toPortInDto(consumerUpdateSessionUserVo, mentoringName, startTime, mentorUuid, SESSION_CONFIRM));
+        }
     }
 
 }
