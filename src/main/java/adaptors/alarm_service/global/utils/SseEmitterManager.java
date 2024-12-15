@@ -63,7 +63,7 @@ public class SseEmitterManager {
         }
     }
 
-    private void sendSSE(AlarmDomain alarmDomain, String userUuid, Object message) {
+    private void sendSSE(AlarmDomain alarmDomain, String userUuid, String message) {
 
         SseEmitter emitter = emitters.get(userUuid);
 
