@@ -69,7 +69,7 @@ public class SseEmitterManager {
 
         if (emitter != null) {
             try {
-                emitter.send(message);
+                emitter.send(alarmDomain.toString());
             } catch (IOException | IllegalStateException e) {
                 log.error("Error sending SSE for user {} : {}", userUuid, e.getMessage());
                 emitters.remove(userUuid);
