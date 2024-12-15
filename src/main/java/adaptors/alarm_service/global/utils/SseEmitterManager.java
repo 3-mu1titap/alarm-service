@@ -20,7 +20,7 @@ public class SseEmitterManager {
      */
     public SseEmitter createEmitter(String userUuid) {
 
-        SseEmitter emitter = new SseEmitter(Long.MAX_VALUE); // 무제한 연결
+        SseEmitter emitter = new SseEmitter(30 ^ 60 * 1000L); // 무제한 연결
         emitters.put(userUuid, emitter);
 
         log.info("SSE Emitter created for user: {}", userUuid);
@@ -78,5 +78,22 @@ public class SseEmitterManager {
             log.warn("No SseEmitter found for user: {} ", userUuid);
         }
     }
+
+//    public void sendSseNotification(String userInfo, Notification notification) {
+//        SseEmitter emitter = clients.get(userInfo);
+//        log.info("——————————————");
+//        log.info(clients.toString());
+//        log.info("——————————————");
+//        if (emitter != null) {
+//            try {
+//                emitter.send(notification.toString());
+//                log.info("sse success send event, emitter: {}", emitter);
+//            } catch (Exception e) {
+//                clients.remove(userInfo);
+//                log.error("Error while sending {} notification: {}", notification.getType(), e.getMessage());
+//            }
+//        }
+//        else log.info("emitter is null");
+//    }
 
 }
