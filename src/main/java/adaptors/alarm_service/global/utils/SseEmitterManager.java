@@ -20,7 +20,7 @@ public class SseEmitterManager {
      */
     public SseEmitter createEmitter(String userUuid) {
 
-        SseEmitter emitter = new SseEmitter(30 ^ 60 * 1000L); // 무제한 연결
+        SseEmitter emitter = new SseEmitter(30 ^ 60 * 1000L); // 30분
         emitters.put(userUuid, emitter);
 
         log.info("SSE Emitter created for user: {}", userUuid);
@@ -69,7 +69,14 @@ public class SseEmitterManager {
 
         if (emitter != null) {
             try {
-                emitter.send(message);
+                log.info("전송 성공 : {}", message);
+//                emitter.send(message);
+                emitter.send(
+                        SseEmitter.event()
+                                .id(userUuid)
+                                .name(alarmDomain.getAlarmType().toString())
+                                .data(message)
+                );
             } catch (IOException | IllegalStateException e) {
                 log.error("Error sending SSE for user {} : {}", userUuid, e.getMessage());
                 emitters.remove(userUuid);
