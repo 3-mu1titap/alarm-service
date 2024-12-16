@@ -21,7 +21,7 @@ public class SseEmitterManager {
      */
     public SseEmitter createEmitter(String userUuid) {
 
-        SseEmitter emitter = new SseEmitter(30 ^ 60 * 1000L); // 30분
+        SseEmitter emitter = new SseEmitter(30 * 60 * 1000L); // 30분
         emitters.put(userUuid, emitter);
 
         log.info("SSE Emitter created for user: {}", userUuid);
@@ -30,21 +30,17 @@ public class SseEmitterManager {
             emitters.remove(userUuid);
             log.info("SSE connection completed for user: {}", userUuid);
         });
-        emitter.onTimeout(() -> {
-            emitters.remove(userUuid);
-            log.info("SSE connection timed out for user: {}", userUuid);
-        });
-        emitter.onError((e) -> {
-            emitters.remove(userUuid);
-            log.error("SSE connection error for user: {}", userUuid, e);
-        });
+//        emitter.onTimeout(() -> {
+//            emitters.remove(userUuid);
+//            log.info("SSE connection timed out for user: {}", userUuid);
+//        });
+//        emitter.onError((e) -> {
+//            emitters.remove(userUuid);
+//            log.error("SSE connection error for user: {}", userUuid, e);
+//        });
 
         try {
-            emitter.send(
-                    SseEmitter.event()
-                            .id(userUuid)
-                            .name(AlarmType.SESSION_CONFIRM.toString())
-                            .data("알림 됐니")
+            emitter.send("connect"
             );
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -82,13 +78,13 @@ public class SseEmitterManager {
         if (emitter != null) {
             try {
                 log.info("전송 성공 : {}", message);
-//                emitter.send(message);
-                emitter.send(
-                        SseEmitter.event()
-                                .id(userUuid)
-                                .name(alarmDomain.getAlarmType().toString())
-                                .data(message)
-                );
+                emitter.send(message);
+//                emitter.send(
+//                        SseEmitter.event()
+//                                .id(userUuid)
+//                                .name(alarmDomain.getAlarmType().toString())
+//                                .data(message)
+//                );
             } catch (IOException | IllegalStateException e) {
                 log.error("Error sending SSE for user {} : {}", userUuid, e.getMessage());
                 emitters.remove(userUuid);
