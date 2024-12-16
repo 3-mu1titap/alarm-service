@@ -1,6 +1,7 @@
 package adaptors.alarm_service.global.utils;
 
 import adaptors.alarm_service.alarm.domain.model.AlarmDomain;
+import adaptors.alarm_service.alarm.domain.model.AlarmType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
@@ -37,6 +38,17 @@ public class SseEmitterManager {
             emitters.remove(userUuid);
             log.error("SSE connection error for user: {}", userUuid, e);
         });
+
+        try {
+            emitter.send(
+                    SseEmitter.event()
+                            .id(userUuid)
+                            .name(AlarmType.SESSION_CONFIRM.toString())
+                            .data("알림 됐니")
+            );
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         return emitter;
     }
@@ -78,6 +90,9 @@ public class SseEmitterManager {
                                 .data(message)
                 );
             } catch (IOException | IllegalStateException e) {
+                log.error("Error sending SSE for user {} : {}", userUuid, e.getMessage());
+                emitters.remove(userUuid);
+            } catch (Exception e) {
                 log.error("Error sending SSE for user {} : {}", userUuid, e.getMessage());
                 emitters.remove(userUuid);
             }
