@@ -27,13 +27,13 @@ public class AlarmScheduler {
 
         log.info("findAlarmsEqualTriggerDate now : {}", now);
 
-        List<AlarmDomain> alarmDomainList = alarmRepositoryPort.findAlarmsByTriggerDate(now).stream()
-                .map(alarmDomainService::toDomain)
-                .toList();
-
-        for (AlarmDomain alarmDomain : alarmDomainList) {
-            sseEmitterManager.sendAlarm(alarmDomain);
-        }
+//        List<AlarmDomain> alarmDomainList = alarmRepositoryPort.findAlarmsByTriggerDate(now).stream()
+//                .map(alarmDomainService::toDomain)
+//                .toList();
+//
+//        for (AlarmDomain alarmDomain : alarmDomainList) {
+//            sseEmitterManager.sendAlarm(alarmDomain);
+//        }
 
     }
 
