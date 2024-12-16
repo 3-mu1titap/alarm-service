@@ -21,7 +21,7 @@ public class AlarmScheduler {
     private final AlarmDomainService alarmDomainService;
     private final SseEmitterManager sseEmitterManager;
 
-    @Scheduled(cron = "0 * * * * *", zone = "Asia/Seoul") // 매 분 0초에 실행
+    @Scheduled(cron = "0 0 * * * *", zone = "Asia/Seoul") // 매 시간 정각에 실행
     public void findAlarmsEqualTriggerDate() {
         LocalDateTime now = LocalDateTime.now();
 
