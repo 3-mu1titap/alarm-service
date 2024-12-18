@@ -1,6 +1,7 @@
 package adaptors.alarm_service.global.utils;
 
 import adaptors.alarm_service.alarm.domain.model.AlarmDomain;
+import adaptors.alarm_service.alarm.domain.model.AlarmType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
@@ -72,7 +73,7 @@ public class SseEmitterManager {
             try {
                 log.info("전송 성공 : {}", message);
 //                objectMapper.writeValueAsString(message);
-                emitter.send(alarmDomain.getAlarmType().toString() + ":" + message);
+                emitter.send(AlarmType.fromString(alarmDomain.getAlarmType().toString()) + ":" + message);
 
 //                emitter.send(
 //                        SseEmitter.event()
