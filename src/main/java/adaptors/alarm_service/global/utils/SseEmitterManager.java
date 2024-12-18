@@ -39,13 +39,6 @@ public class SseEmitterManager {
 //            log.error("SSE connection error for user: {}", userUuid, e);
 //        });
 
-        try {
-            emitter.send("connect"
-            );
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
         return emitter;
     }
 
@@ -79,13 +72,14 @@ public class SseEmitterManager {
             try {
                 log.info("전송 성공 : {}", message);
 //                objectMapper.writeValueAsString(message);
-//                emitter.send(message);
-                emitter.send(
-                        SseEmitter.event()
-                                .id(userUuid)
-                                .name(alarmDomain.getAlarmType().toString())
-                                .data(message)
-                );
+                emitter.send(alarmDomain.getAlarmType().toString() + ":" + message);
+
+//                emitter.send(
+//                        SseEmitter.event()
+//                                .id(userUuid)
+//                                .name(alarmDomain.getAlarmType().toString())
+//                                .data(message)
+//                );
             } catch (IOException | IllegalStateException e) {
                 log.error("Error sending SSE for user {} : {}", userUuid, e.getMessage());
                 emitters.remove(userUuid);
