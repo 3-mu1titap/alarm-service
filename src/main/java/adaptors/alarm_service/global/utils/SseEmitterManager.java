@@ -1,7 +1,6 @@
 package adaptors.alarm_service.global.utils;
 
 import adaptors.alarm_service.alarm.domain.model.AlarmDomain;
-import adaptors.alarm_service.alarm.domain.model.AlarmType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
@@ -15,6 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class SseEmitterManager {
 
     private final Map<String, SseEmitter> emitters = new ConcurrentHashMap<>();
+//    private final ObjectMapper objectMapper;
 
     /**
      * SseEmitter 생성 및 등록
@@ -78,6 +78,7 @@ public class SseEmitterManager {
         if (emitter != null) {
             try {
                 log.info("전송 성공 : {}", message);
+//                objectMapper.writeValueAsString(message);
                 emitter.send(message);
 //                emitter.send(
 //                        SseEmitter.event()
@@ -96,22 +97,5 @@ public class SseEmitterManager {
             log.warn("No SseEmitter found for user: {} ", userUuid);
         }
     }
-
-//    public void sendSseNotification(String userInfo, Notification notification) {
-//        SseEmitter emitter = clients.get(userInfo);
-//        log.info("——————————————");
-//        log.info(clients.toString());
-//        log.info("——————————————");
-//        if (emitter != null) {
-//            try {
-//                emitter.send(notification.toString());
-//                log.info("sse success send event, emitter: {}", emitter);
-//            } catch (Exception e) {
-//                clients.remove(userInfo);
-//                log.error("Error while sending {} notification: {}", notification.getType(), e.getMessage());
-//            }
-//        }
-//        else log.info("emitter is null");
-//    }
 
 }
