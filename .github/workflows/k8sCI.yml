@@ -12,6 +12,7 @@ env:
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME2 }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD2 }}
   ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
+  
 
 jobs:
   build-and-push:
@@ -59,7 +60,7 @@ jobs:
       - name: Trigger ToArgoCD Workflow
         if: success()
         env:
-          REPO: "mu1titap/argocd-manifests"
+          REPO: "3-mu1titap/argocd-manifests"
           PAT_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
         run: |
           curl -X POST -H "Authorization: token $PAT_TOKEN" \
