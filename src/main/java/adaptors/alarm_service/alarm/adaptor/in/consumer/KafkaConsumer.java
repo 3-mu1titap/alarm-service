@@ -40,7 +40,7 @@ public class KafkaConsumer {
     @KafkaListener(topics = "create-review-topic", groupId = GROUP_ID, containerFactory = "createReviewDtoListener")
     public void processCreateReviewAlarm(ConsumerCreateReviewVo consumerCreateReviewVo) {
         log.info("consumerCreateReviewVo: {}", consumerCreateReviewVo);
-        alarmUseCase.createAlarm(consumerVoMapper.toPortInDto(consumerCreateReviewVo, REVIEW_REGISTER));
+//        alarmUseCase.createAlarm(consumerVoMapper.toPortInDto(consumerCreateReviewVo, REVIEW_REGISTER));
     }
 
     @KafkaListener(topics = "pay-session", groupId = GROUP_ID, containerFactory = "sessionPayDtoListener")
