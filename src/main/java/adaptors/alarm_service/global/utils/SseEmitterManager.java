@@ -73,7 +73,6 @@ public class SseEmitterManager {
                 log.info("전송 성공 : {}", message);
 //                objectMapper.writeValueAsString(message);
                 emitter.send(alarmDomain.getAlarmType() + ":" + message);
-                emitter.send(alarmDomain.getAlarmType().toString() + ":" + message);
 
 //                emitter.send(
 //                        SseEmitter.event()
